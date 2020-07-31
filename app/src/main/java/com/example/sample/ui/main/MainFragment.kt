@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.sample.R
+import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -18,14 +22,25 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Mapbox.getInstance(
+            requireContext(),
+            "pk.eyJ1IjoidHlwZWJyb29rIiwiYSI6ImNqNHVyaTc5dDBuazczMm1jenl3cG8wb3IifQ.2UEZ-jiHgHvYYqVirXhgpw"
+        )
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        button.setOnClickListener {
-
+        with(mapView) {
+            onCreate(savedInstanceState)
+            getMapAsync { map ->
+                map.setStyle(Style.Builder().fromUri("asset://topographique.json"))
+                map.cameraPosition = CameraPosition.Builder()
+                    .target(LatLng(25.023167, 121.585674))
+                    .zoom(12.0)
+                    .build()
+            }
         }
     }
 }
