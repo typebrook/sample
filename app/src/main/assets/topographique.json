@@ -16,7 +16,10 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "https://typebrook.github.io/mapstew/resources/tiles.json"
+      "tiles": [
+        "asset://tiles/{z}/{x}/{y}.pbf"
+      ],
+      "maxzoom": 14
     },
     "hillshading": {
       "type": "raster",
