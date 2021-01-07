@@ -10,4 +10,14 @@
         android:name="com.example.sample.ui.main.MainFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment" />
+
+    <fragment
+        android:id="@+id/foo"
+        android:name="com.mapbox.mapboxsdk.plugins.places.autocomplete.ui.PlaceAutocompleteFragment"
+        android:label="foo" >
+        <argument
+            android:name="com.mapbox.mapboxsdk.plugins.places.accessToken"
+            android:defaultValue="pk.eyJ1IjoidHlwZWJyb29rIiwiYSI6ImNqNHVyaTc5dDBuazczMm1jenl3cG8wb3IifQ.2UEZ-jiHgHvYYqVirXhgpw"
+            app:argType="string"/>
+    </fragment>
 </navigation>
