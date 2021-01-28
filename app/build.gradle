@@ -44,6 +44,9 @@ dependencies {
 
     // A better logger
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Mapbox
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.1'
 }
 
 androidExtensions {
