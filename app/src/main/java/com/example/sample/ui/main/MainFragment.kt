@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.sample.R
 import com.mapbox.maps.MapView
 import com.mapbox.maps.Style
+import com.mapbox.maps.plugin.gestures.addOnMapClickListener
 
 class MainFragment : Fragment() {
 
@@ -23,6 +24,12 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mapView = view.findViewById<MapView>(R.id.mapView)
-        mapView?.getMapboxMap()?.loadStyleUri(Style.MAPBOX_STREETS)
+        mapView?.getMapboxMap()?.run {
+            loadStyleUri(Style.DARK)
+            addOnMapClickListener {
+                loadStyleUri("asset://rudymap.json")
+                true
+            }
+        }
     }
 }
