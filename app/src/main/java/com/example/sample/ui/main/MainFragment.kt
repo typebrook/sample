@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.sample.R
-import com.mapbox.maps.MapView
-import com.mapbox.maps.Style
-import com.mapbox.maps.plugin.gestures.addOnMapClickListener
+import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.maps.MapView
+import com.mapbox.mapboxsdk.maps.Style
 
 class MainFragment : Fragment() {
 
@@ -17,6 +19,7 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Mapbox.getInstance(requireContext(), null)
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
@@ -24,12 +27,12 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mapView = view.findViewById<MapView>(R.id.mapView)
-        mapView?.getMapboxMap()?.run {
-            loadStyleUri(Style.DARK)
-            addOnMapClickListener {
-                loadStyleUri("asset://rudymap.json")
-                true
-            }
+        mapView?.getMapAsync {
+            it.setStyle(Style.Builder().fromUri("asset://rudymap.json"))
+            it.cameraPosition = CameraPosition.Builder()
+                .target(LatLng(25.0231672, 121.58567))
+                .zoom(9.0)
+                .build()
         }
     }
 }
