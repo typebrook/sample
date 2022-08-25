@@ -43,6 +43,10 @@ dependencies {
 
     // A better logger
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    implementation ('org.maplibre.gl:android-sdk:9.5.2') {
+        exclude group: 'com.google.android.gms'
+    }
 }
 
 androidExtensions {
